@@ -1,0 +1,16 @@
+{
+  "name": "tools-api-java",
+  "version": "1.0.0",
+  "scripts": {
+    "mvn:run": "sh -c './mvnw spring-boot:run'",
+    "mvn:clean": "sh -c './mvnw clean'",
+    "mvn:test": "sh -c './mvnw test'",
+    "mvn:compile": "sh -c './mvnw compile'",
+    "mvn:package": "sh -c './mvnw package'",
+    "mvn:install": "sh -c './mvnw install'",
+    "mvn:deploy": "sh -c './mvnw deploy'",
+    "mvn:dependency": "./mvnw dependency:tree",
+    "mvn:verify": "sh -c './mvnw verify'",
+    "module:create": "sh -c './scripts/create_module.sh'"
+  }
+}
