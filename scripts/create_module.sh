@@ -8,7 +8,7 @@ fi
 MODULE="$1"
 MODULE_CLASS=$(echo "${MODULE:0:1}" | tr '[:lower:]' '[:upper:]')$(echo "${MODULE:1}")
 
-BASE_DIR="src/main/java/fr/huiitre/tools/tools_core/${MODULE}"
+BASE_DIR="src/main/java/fr/huiitre/tools/tools_todolist/${MODULE}"
 echo "Création de l'arborescence pour le module '${MODULE}' dans ${BASE_DIR}"
 
 mkdir -p "${BASE_DIR}/controller" "${BASE_DIR}/model" "${BASE_DIR}/service" "${BASE_DIR}/repository"

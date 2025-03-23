@@ -24,7 +24,7 @@ public class User {
     @Column(name = "remember_token", length = 100)
     private String rememberToken;
 
-    @Column(name = "role", nullable = false)
+    @Column(name = "role", nullable = false, columnDefinition = "integer default 1")
     private Integer role;
 
     @Column(name = "is_active", nullable = false)
