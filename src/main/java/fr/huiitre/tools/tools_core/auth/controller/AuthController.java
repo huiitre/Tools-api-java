@@ -1,5 +1,7 @@
 package fr.huiitre.tools.tools_core.auth.controller;
 
+import fr.huiitre.tools.annotations.RequireToken;
+
 import fr.huiitre.tools.tools_core.auth.dto.GooglePayload;
 import fr.huiitre.tools.tools_core.auth.dto.LoginRequest;
 import fr.huiitre.tools.tools_core.auth.dto.UserResponse;
@@ -59,6 +61,7 @@ public class AuthController {
      * Exemple d'URL : /core/auth/me
      */
     @GetMapping("/me")
+    @RequireToken(true)
     public ResponseEntity<?> me(/* @RequestHeader("Authorization") */@RequestHeader(value = "Authorization", required = false) String token) {
         try {
             String cleanedToken = StringUtils.cleanToken(token);
@@ -180,6 +183,7 @@ public class AuthController {
      * Nécessite le header Authorization
      */
     @PostMapping("/refresh")
+    @RequireToken(true)
     public ResponseEntity<?> refreshToken(@RequestHeader("Authorization") String authHeader) {
         try {
             // Nettoyage du token reçu dans l'en-tête
@@ -217,6 +221,7 @@ public class AuthController {
      * Nécessite le header Authorization
      */
     @PostMapping("/logout")
+    @RequireToken(true)
     public ResponseEntity<?> logout(@RequestHeader("Authorization") String authHeader) {
         try {
             // Nettoyage du token reçu dans l'en-tête
