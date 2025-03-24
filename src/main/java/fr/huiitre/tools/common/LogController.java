@@ -76,6 +76,17 @@ public class LogController {
         }
     }
 
+    public void error(Object message, Object... additional) {
+        ch.qos.logback.classic.Logger callerLogger = (ch.qos.logback.classic.Logger) getCallerLogger();
+        initFileAppender(callerLogger, moduleName);
+
+        if (additional == null || additional.length == 0) {
+            callerLogger.error(convert(message));
+        } else {
+            callerLogger.error("{} {}", convert(message), convert(additional[0]));
+        }
+    }
+
     private void initFileAppender(ch.qos.logback.classic.Logger callerLogger, String moduleName) {
         if (callerLogger.getAppender("FILE-" + moduleName) != null) {
             return;
@@ -95,6 +106,12 @@ public class LogController {
         fileAppender.setContext(context);
         fileAppender.setName("FILE-" + moduleName);
         fileAppender.setFile(filePath);
+
+        // Ajout d'un filtre pour n'accepter que les logs de niveau INFO et supérieur (DEBUG sera filtré)
+        ch.qos.logback.classic.filter.ThresholdFilter filter = new ch.qos.logback.classic.filter.ThresholdFilter();
+        filter.setLevel("INFO"); // Par défaut, DEBUG ne sera pas écrit
+        filter.start();
+        fileAppender.addFilter(filter);
     
         TimeBasedRollingPolicy<ILoggingEvent> rollingPolicy = new TimeBasedRollingPolicy<>();
         rollingPolicy.setContext(context);
