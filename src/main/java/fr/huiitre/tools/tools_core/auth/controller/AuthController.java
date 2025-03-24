@@ -50,6 +50,7 @@ public class AuthController extends BaseController {
             UserResponse userResponse = authService.login(request);
             return ResponseEntity.ok(Map.of( "data", userResponse));
         } catch (Exception e) {
+            logger.error(e.getMessage());
             return ResponseEntity.badRequest().body(Map.of( "msg", e.getMessage()));
         }
     }
@@ -63,9 +64,12 @@ public class AuthController extends BaseController {
     @RequireToken(true)
     public ResponseEntity<?> me(@RequestAttribute("user") User user, @RequestHeader(value = "Authorization", required = false) String token) {
         try {
+            logger.info(user);
+
             UserResponse userInfos = authService.getUserInfosById(user.getId());
             return ResponseEntity.ok(Map.of("data", userInfos));
         } catch (Exception e) {
+            logger.error(e.getMessage());
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().body(Map.of( "msg", e.getMessage()));
         }
@@ -148,9 +152,11 @@ public class AuthController extends BaseController {
             return ResponseEntity.ok(Map.of( "data", updatedUser));
         }
         catch(IllegalArgumentException e) {
+            logger.error("Le token est invalide (décodage impossible).");
             return ResponseEntity.badRequest().body(Map.of("msg", "Le token est invalide (décodage impossible)."));
         }
         catch (Exception e) {
+            logger.error(e.getMessage());
             return ResponseEntity.badRequest().body(Map.of( "msg", e.getMessage()));
         }
     }
@@ -165,6 +171,7 @@ public class AuthController extends BaseController {
             String message = authService.register(request);
             return ResponseEntity.ok(Map.of("msg", message));
         } catch (Exception e) {
+            logger.error(e.getMessage());
             return ResponseEntity.badRequest().body(Map.of("msg", e.getMessage()));
         }
     }
@@ -202,6 +209,7 @@ public class AuthController extends BaseController {
             // Retourner la réponse JSON avec status et data
             return ResponseEntity.ok(Map.of( "data", updatedUser));
         } catch (Exception e) {
+            logger.error(e.getMessage());
             // En cas d'erreur, on renvoie le message d'erreur dans la réponse JSON
             return ResponseEntity.badRequest().body(Map.of("msg", e.getMessage()));
         }
@@ -234,6 +242,7 @@ public class AuthController extends BaseController {
             // Retourner une réponse indiquant que l'utilisateur est déconnecté
             return ResponseEntity.ok(Map.of( "msg", "Vous êtes déconnecté"));
         } catch (Exception e) {
+            logger.error(e.getMessage());
             return ResponseEntity.badRequest().body(Map.of( "msg", e.getMessage()));
         }
     }

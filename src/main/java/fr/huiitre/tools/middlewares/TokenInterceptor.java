@@ -1,6 +1,7 @@
 package fr.huiitre.tools.middlewares;
 
 import fr.huiitre.tools.annotations.RequireToken;
+import fr.huiitre.tools.common.LogController;
 import fr.huiitre.tools.tools_core.config.service.ConfigService;
 import fr.huiitre.tools.tools_core.user.model.User;
 import fr.huiitre.tools.tools_core.user.repository.UserRepository;
@@ -9,11 +10,7 @@ import fr.huiitre.tools.tools_core.utils.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.time.LocalDateTime;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
@@ -23,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TokenInterceptor implements HandlerInterceptor {
 
-    private static final Logger logger = LoggerFactory.getLogger(TokenInterceptor.class);
+    protected final LogController logger = new LogController();
 
     @Autowired
     private UserRepository userRepository;
@@ -40,6 +37,7 @@ public class TokenInterceptor implements HandlerInterceptor {
 
         // On vérifie si le handler correspond à une méthode de contrôleur
         if (!(handler instanceof HandlerMethod)) {
+            logger.error("Handler non applicable (pas une méthode de contrôleur).");
             System.out.println("Handler non applicable (pas une méthode de contrôleur).");
             return true;
         }
@@ -55,6 +53,7 @@ public class TokenInterceptor implements HandlerInterceptor {
             String authHeader = request.getHeader("Authorization");
             
             if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+                logger.error("Token API obligatoire");
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 response.setContentType("application/json");
                 response.getWriter().write("{\"msg\":\"Token API obligatoire\"}");
@@ -67,6 +66,7 @@ public class TokenInterceptor implements HandlerInterceptor {
             User user = userRepository.findByRememberToken(token);
             
             if (user == null) {
+                logger.error("Token invalide");
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 response.setContentType("application/json");
                 response.getWriter().write("{\"msg\":\"Token invalide\"}");
@@ -81,6 +81,7 @@ public class TokenInterceptor implements HandlerInterceptor {
 
             //* si le paramètre vaut 0, on considère qu'il est désactivé */
             if (timeExpiredToken > 0 && (currentDate.isAfter(tokenExpiredDate))) {
+                logger.error("Token expiré");
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 response.setContentType("application/json");
                 response.getWriter().write("{\"msg\":\"Token expiré\"}");
