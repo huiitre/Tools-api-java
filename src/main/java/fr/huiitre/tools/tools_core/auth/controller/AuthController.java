@@ -1,14 +1,14 @@
 package fr.huiitre.tools.tools_core.auth.controller;
 
 import fr.huiitre.tools.annotations.RequireToken;
-
+import fr.huiitre.tools.common.BaseController;
 import fr.huiitre.tools.tools_core.auth.dto.GooglePayload;
 import fr.huiitre.tools.tools_core.auth.dto.LoginRequest;
 import fr.huiitre.tools.tools_core.auth.dto.UserResponse;
 import fr.huiitre.tools.tools_core.auth.dto.LoginWithGoogleRequest;
 import fr.huiitre.tools.tools_core.auth.dto.RegistrationRequest;
 import fr.huiitre.tools.tools_core.auth.service.AuthService;
-
+import fr.huiitre.tools.tools_core.user.model.User;
 import fr.huiitre.tools.tools_core.utils.StringUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/core/auth")
-public class AuthController {
+public class AuthController extends BaseController {
 
     @Autowired
     private AuthService authService;
@@ -43,7 +43,6 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody(required = false) LoginRequest request) {
         try {
-            System.out.println("salut");
             if (request == null) {
                 throw new Exception("L'adresse email et le mot de passe sont obligatoires");
             }
@@ -62,16 +61,9 @@ public class AuthController {
      */
     @GetMapping("/me")
     @RequireToken(true)
-    public ResponseEntity<?> me(/* @RequestHeader("Authorization") */@RequestHeader(value = "Authorization", required = false) String token) {
+    public ResponseEntity<?> me(@RequestAttribute("user") User user, @RequestHeader(value = "Authorization", required = false) String token) {
         try {
-            String cleanedToken = StringUtils.cleanToken(token);
-            if (cleanedToken == null || cleanedToken.trim().isEmpty()) {
-                throw new Exception("Token API obligatoire");
-            }
-
-            // Récupérer les informations utilisateur à partir du token
-            UserResponse userInfos = authService.getUserInfosByToken(cleanedToken);
-
+            UserResponse userInfos = authService.getUserInfosById(user.getId());
             return ResponseEntity.ok(Map.of("data", userInfos));
         } catch (Exception e) {
             System.out.println(e.getMessage());
