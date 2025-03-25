@@ -62,7 +62,7 @@ public class AuthController extends BaseController {
      */
     @GetMapping("/me")
     @RequireToken(true)
-    public ResponseEntity<?> me(@RequestAttribute("user") User user, @RequestHeader(value = "Authorization", required = false) String token) {
+    public ResponseEntity<?> me(@RequestAttribute("user") User user) {
         try {
             logger.info(user);
 

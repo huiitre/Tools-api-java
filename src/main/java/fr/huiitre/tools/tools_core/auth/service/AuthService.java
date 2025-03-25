@@ -167,7 +167,7 @@ public class AuthService {
 
             // Récupérer l'utilisateur mis à jour
             User updatedUser = userRepository.findById(user.getId())
-                    .orElseThrow(() -> new Exception("Utilisateur introuvable après mise à jour"));
+                .orElseThrow(() -> new Exception("Utilisateur introuvable après mise à jour"));
 
             return new UserResponse(updatedUser);
         } catch (Exception e) {
