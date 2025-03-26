@@ -7,8 +7,7 @@ import fr.huiitre.tools.tools_core.auth.dto.RegistrationRequest;
 
 import fr.huiitre.tools.tools_core.user.model.User;
 import fr.huiitre.tools.tools_core.user.repository.UserRepository;
-
-import fr.huiitre.tools.tools_core.utils.*;
+import fr.huiitre.tools.utils.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;

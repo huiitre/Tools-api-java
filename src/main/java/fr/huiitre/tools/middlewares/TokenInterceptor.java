@@ -1,12 +1,11 @@
 package fr.huiitre.tools.middlewares;
 
 import fr.huiitre.tools.annotations.RequireToken;
-import fr.huiitre.tools.common.LogController;
+import fr.huiitre.tools.common.controller.LogController;
 import fr.huiitre.tools.tools_core.config.service.ConfigService;
 import fr.huiitre.tools.tools_core.user.model.User;
 import fr.huiitre.tools.tools_core.user.repository.UserRepository;
-import fr.huiitre.tools.tools_core.utils.StringUtils;
-
+import fr.huiitre.tools.utils.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 

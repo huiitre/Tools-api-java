@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "mvn:run": "sh -c './mvnw spring-boot:run'",
-    "mvn:clean": "sh -c './mvnw clean'",
+    "mvn:clean": "sh -c './mvnw clean install -U'",
     "mvn:test": "sh -c './mvnw test'",
     "mvn:compile": "sh -c './mvnw compile'",
     "mvn:package": "sh -c './mvnw package'",

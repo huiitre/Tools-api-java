@@ -3,6 +3,8 @@ package fr.huiitre.tools.tools_dtl.user_activity.model;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name = "user_activity", schema = "tools_dtl")
 public class UserActivity {
@@ -12,7 +14,7 @@ public class UserActivity {
     @Column(name = "iduser_activity", nullable = false)
     private Integer iduserActivity;
 
-    @Column(name = "idhistoric", nullable = false)
+    @Column(name = "idhistoric", nullable = false) 
     private Integer idhistoric;
 
     @Column(name = "iduser", nullable = false)
@@ -24,7 +26,7 @@ public class UserActivity {
     @Column(name = "token", columnDefinition = "text")
     private String token;
 
-    @Column(name = "ip_address", columnDefinition = "inet")
+    @Column(name = "ip_address", columnDefinition = "inet", nullable = true)
     private String ipAddress;
 
     @Column(name = "user_agent", columnDefinition = "text")

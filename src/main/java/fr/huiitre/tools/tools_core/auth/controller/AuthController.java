@@ -1,7 +1,7 @@
 package fr.huiitre.tools.tools_core.auth.controller;
 
 import fr.huiitre.tools.annotations.RequireToken;
-import fr.huiitre.tools.common.BaseController;
+import fr.huiitre.tools.common.controller.BaseController;
 import fr.huiitre.tools.tools_core.auth.dto.GooglePayload;
 import fr.huiitre.tools.tools_core.auth.dto.LoginRequest;
 import fr.huiitre.tools.tools_core.auth.dto.UserResponse;
@@ -9,7 +9,7 @@ import fr.huiitre.tools.tools_core.auth.dto.LoginWithGoogleRequest;
 import fr.huiitre.tools.tools_core.auth.dto.RegistrationRequest;
 import fr.huiitre.tools.tools_core.auth.service.AuthService;
 import fr.huiitre.tools.tools_core.user.model.User;
-import fr.huiitre.tools.tools_core.utils.StringUtils;
+import fr.huiitre.tools.utils.StringUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

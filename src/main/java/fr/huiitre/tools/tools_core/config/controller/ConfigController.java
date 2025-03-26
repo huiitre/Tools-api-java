@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.huiitre.tools.common.BaseController;
+import fr.huiitre.tools.common.controller.BaseController;
 import fr.huiitre.tools.tools_core.config.service.ConfigService;
 import fr.huiitre.tools.tools_core.user.model.User;
 

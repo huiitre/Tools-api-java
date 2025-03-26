@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import fr.huiitre.tools.annotations.RequireToken;
-import fr.huiitre.tools.common.BaseController;
+import fr.huiitre.tools.common.controller.BaseController;
 import fr.huiitre.tools.tools_core.feedback.dto.AddFeedbackRequest;
 import fr.huiitre.tools.tools_core.feedback.model.Feedback;
 import fr.huiitre.tools.tools_core.feedback.service.FeedbackService;

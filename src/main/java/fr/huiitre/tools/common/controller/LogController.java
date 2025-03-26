@@ -1,4 +1,4 @@
-package fr.huiitre.tools.common;
+package fr.huiitre.tools.common.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

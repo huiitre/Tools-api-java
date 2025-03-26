@@ -1,4 +1,4 @@
-package fr.huiitre.tools.tools_core.utils;
+package fr.huiitre.tools.utils;
 
 import java.security.SecureRandom;
 import java.util.regex.Pattern;
