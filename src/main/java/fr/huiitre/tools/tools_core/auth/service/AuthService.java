@@ -57,7 +57,7 @@ public class AuthService {
         updateUserToken(user, tokenResponse);
 
         User updatedUser = userRepository.findById(user.getId())
-                .orElseThrow(() -> new Exception("Utilisateur introuvable après mise à jour"));
+            .orElseThrow(() -> new Exception("Utilisateur introuvable après mise à jour"));
 
         return new UserResponse(updatedUser);
     }

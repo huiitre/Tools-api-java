@@ -6,11 +6,12 @@
     "mvn:clean": "sh -c './mvnw clean install -U'",
     "mvn:test": "sh -c './mvnw test'",
     "mvn:compile": "sh -c './mvnw compile'",
-    "mvn:package": "sh -c './mvnw package'",
+    "mvn:package": "sh -c './mvnw clean package -DskipTests'",
     "mvn:install": "sh -c './mvnw install'",
     "mvn:deploy": "sh -c './mvnw deploy'",
     "mvn:dependency": "./mvnw dependency:tree",
     "mvn:verify": "sh -c './mvnw verify'",
-    "module:create": "sh -c './scripts/create_module.sh'"
+    "module:create": "sh -c './scripts/create_module.sh'",
+    "build": "./build.sh"
   }
 }

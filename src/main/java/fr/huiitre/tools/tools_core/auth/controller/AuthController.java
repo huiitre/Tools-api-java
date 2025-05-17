@@ -64,8 +64,7 @@ public class AuthController extends BaseController {
     @RequireToken(true)
     public ResponseEntity<?> me(@RequestAttribute("user") User user) {
         try {
-            logger.info(user);
-
+            // logger.info(user);
             UserResponse userInfos = authService.getUserInfosById(user.getId());
             return ResponseEntity.ok(Map.of("data", userInfos));
         } catch (Exception e) {

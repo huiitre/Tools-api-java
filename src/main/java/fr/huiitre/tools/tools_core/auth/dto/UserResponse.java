@@ -3,11 +3,13 @@ package fr.huiitre.tools.tools_core.auth.dto;
 import fr.huiitre.tools.tools_core.user.model.User;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UserResponse {
     private Integer id;
     private String email;
     private String name;
-    private String token;
+    private String remember_token;
     private LocalDateTime tokenDate;
     private Integer isActive;
 
@@ -19,7 +21,7 @@ public class UserResponse {
         this.id = user.getId();
         this.email = user.getEmail();
         this.name = user.getName();
-        this.token = user.getRememberToken();
+        this.remember_token = user.getRememberToken();
         this.tokenDate = user.getTokenDate();
         this.isActive = user.getIsActive();
     }
@@ -42,11 +44,12 @@ public class UserResponse {
     public void setName(String name) {
         this.name = name;
     }
+    @JsonProperty("remember_token")
     public String getToken() {
-        return token;
+        return remember_token;
     }
     public void setToken(String token) {
-        this.token = token;
+        this.remember_token = token;
     }
     public LocalDateTime getTokenDate() {
         return tokenDate;
