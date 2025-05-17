@@ -12,6 +12,7 @@ import fr.huiitre.tools.tools_dtl.user_activity.dto.AddUserActivityRequest;
 import fr.huiitre.tools.tools_dtl.user_activity.model.UserActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -109,5 +110,17 @@ public class UserActivityController extends BaseController {
             logger.error(e.getMessage());
             return ResponseEntity.badRequest().body(Map.of("msg", e.getMessage()));
         }
+    }
+
+    @GetMapping("/getip")
+    public Map<String, Object> getClientIp(HttpServletRequest request) {
+        String ip = request.getHeader("X-Forwarded-For");
+        if (ip == null || ip.isEmpty()) {
+            ip = request.getRemoteAddr();
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("ip", ip);
+        return response;
     }
 }
