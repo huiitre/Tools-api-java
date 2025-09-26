@@ -2,7 +2,7 @@
   "name": "tools-api-java",
   "version": "1.0.0",
   "scripts": {
-    "mvn:run": "sh -c './mvnw spring-boot:run'",
+    "mvn:run": "sh -c './mvnw spring-boot:run -Dspring-boot.run.arguments=--server.port=8081'",
     "mvn:clean": "sh -c './mvnw clean install -U'",
     "mvn:test": "sh -c './mvnw test'",
     "mvn:compile": "sh -c './mvnw compile'",
